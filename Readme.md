@@ -152,7 +152,7 @@ React Redux is the official React UI bindings layer for Redux. It lets your Reac
 
 # Redux-work-flow
 
-![alt text](Redux-work-flow.jpg)
+<!-- ![alt text](Redux-work-flow.jpg) -->
 
 # A query language for your API
 
