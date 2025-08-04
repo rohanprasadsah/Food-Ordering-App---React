@@ -136,6 +136,24 @@ because <Componentname/> is the short hand way (shortcut) of <Componentname></Co
     **5. Custom Components Still Require Extra Work**
     For complex or highly specific UI components, you may still need to write some custom CSS, which Tailwind doesn’t eliminate entirely.
 
+# React Redux
+
+React Redux is the official React UI bindings layer for Redux. It lets your React components read data from a Redux store, and dispatch actions to the store to update state.
+
+# Getting Started with Redux Toolkit
+
+## Purpose
+
+    The Redux Toolkit package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux:
+
+    i) "Configuring a Redux store is too complicated"
+    ii) "I have to add a lot of packages to get Redux to do anything useful"
+    iii) "Redux requires too much boilerplate code"
+
+# Redux-work-flow
+
+![alt text](Redux-work-flow.jpg)
+
 # A query language for your API
 
 ->> GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.
