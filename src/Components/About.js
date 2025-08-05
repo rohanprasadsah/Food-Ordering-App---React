@@ -21,7 +21,7 @@ class About extends React.Component {
                     )}
                 </UserContext.Consumer>
 
-                <div className="about-page">
+                <div className="flex flex-wrap justify-center gap-5 p-5">
                     <User name={"Rohan (Function)"} location={"Kolkata"} />
                     <UserClass name={"Karan (class)"} location={"Bihar"} />
                     <UserCard />

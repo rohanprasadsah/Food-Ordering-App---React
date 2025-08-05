@@ -26,7 +26,7 @@ const Body = () => {
     const internetStatus = useInternetStatus();
     if (internetStatus === false) {
         return (
-            <div className="status-body">
+            <div className="status-body flex flex-col items-center justify-center h-screen">
                 <h1>Looks like you are offline!! Please check your internet connection!!</h1>
             </div>
         )
@@ -35,12 +35,12 @@ const Body = () => {
     //Conditional Rendering by using Ternary Operator
     return (filteredRestaurants.length === 0) ? <Shimmer /> : (
         <div className="body">
-            <div className="filter">
-                <div className="Search">
-                    <input type="text" className="search-box" value={searchText} onChange={(e) => {
+            <div className="filter flex flex-wrap justify-center items-center gap-4 p-6 bg-white">
+                <div className="Search flex items-center gap-3">
+                    <input type="text" className="search-box px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm min-w-[200px]" placeholder="Search restaurants..." value={searchText} onChange={(e) => {
                         setSearchText(e.target.value);
                     }}></input>
-                    <button className="search-btn" onClick={() => {
+                    <button className="search-btn px-6 py-3 bg-blue-600 text-white font-medium border-none rounded-lg cursor-pointer hover:bg-blue-700 transition-colors duration-300 shadow-sm" onClick={() => {
                         const filtteredList = stateresList.filter((res) => (
                             res.info.name.toLowerCase().includes(searchText.toLowerCase())
                         ))
@@ -49,18 +49,20 @@ const Body = () => {
                     }}>Search</button>
                 </div>
 
-                <button className="filter-btn" onClick={() => {
+                <button className="filter-btn px-6 py-3 bg-blue-600 text-white font-medium border-none rounded-lg cursor-pointer hover:bg-blue-700 transition-colors duration-300 shadow-sm" onClick={() => {
                     const filteredList = filteredRestaurants.filter((res) => res.info.avgRating > 4.5)
                     setFilteredRestaurants(filteredList);
-                }}> Top Rated Restaurants </button>
+                }}>Top Rated Restaurants</button>
 
-                <label className="p-5 font-bold">UserName : </label>
-                <input className="search-box border border-black" type="text" value={loggedInUSer} onChange={(e) => {
-                    setUserName(e.target.value);
-                }}></input>
+                <div className="username-section flex items-center gap-3">
+                    <label className="font-bold text-gray-700 whitespace-nowrap">UserName :</label>
+                    <input className="username-input px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm min-w-[150px]" type="text" value={loggedInUSer} onChange={(e) => {
+                        setUserName(e.target.value);
+                    }}></input>
+                </div>
             </div>
 
-            <div className="res-container">
+            <div className="flex flex-wrap justify-center gap-5 p-5">
                 {/* {console.log(filteredRestaurants)} */}
                 {filteredRestaurants.map((restaurant) => (
                     <Link key={restaurant.info.id} to={"/restaurant/" + restaurant.info.id}>
@@ -69,7 +71,7 @@ const Body = () => {
                             restaurant.info.promoted === true ? <PromotedRestaurantCard swiggyRestaurant={restaurant} /> : <RestaurantCard swiggyRestaurant={restaurant} />
                             :
                             restaurant.info.sla.deliveryTime <= 30 ? <Within30minsRestaurantCard swiggyRestaurant={restaurant} /> : <RestaurantCard swiggyRestaurant={restaurant} />
-                        };
+                        }
 
                     </Link>
                 ))}
