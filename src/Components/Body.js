@@ -38,69 +38,88 @@ const Body = () => {
         <div className="body bg-gradient-to-br from-gray-50 via-white to-gray-100 min-h-screen">
 
             <div className="control-panel bg-white border-b-4 border-emerald-100 shadow-xl">
-                <div className="flex flex-wrap justify-center items-center gap-4 p-6 bg-gradient-to-r from-white via-emerald-50 to-white">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap justify-center items-stretch lg:items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-white via-emerald-50 to-white">
 
-                    <div className="Search flex items-center gap-3 bg-white p-2 rounded-2xl shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300">
-                        <div className="text-2xl px-2">🔍</div>
-                        <input type="text" className="search-box px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-sm min-w-[200px] bg-gray-50 focus:bg-white transition-all duration-300" placeholder="🍽️ Search restaurants..." value={searchText} onChange={(e) => {
-                            setSearchText(e.target.value);
-                        }}></input>
-                        <button className="search-btn px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold border-none rounded-lg cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95" onClick={() => {
-                            const filtteredList = stateresList.filter((res) => (
-                                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-                            ))
-                            setFilteredRestaurants(filtteredList);
-                            // console.log(filtteredList);
-                        }}>🔍 Search</button>
+                    {/* Search Section - Full width on mobile */}
+                    <div className="Search flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 bg-white p-3 sm:p-2 rounded-2xl shadow-lg border border-emerald-100 hover:shadow-xl transition-all duration-300 w-full lg:w-auto">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                            <div className="text-xl sm:text-2xl px-1 sm:px-2">🔍</div>
+                            <input 
+                                type="text" 
+                                className="search-box flex-1 px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-sm bg-gray-50 focus:bg-white transition-all duration-300 text-sm sm:text-base" 
+                                placeholder="🍽️ Search restaurants..." 
+                                value={searchText} 
+                                onChange={(e) => setSearchText(e.target.value)}
+                            />
+                        </div>
+                        <button 
+                            className="search-btn w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold border-none rounded-lg cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 text-sm sm:text-base" 
+                            onClick={() => {
+                                const filteredList = stateresList.filter((res) => (
+                                    res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                                ))
+                                setFilteredRestaurants(filteredList);
+                            }}
+                        >
+                            🔍 Search
+                        </button>
                     </div>
 
-                    <div className="bg-white p-2 rounded-2xl shadow-lg border border-yellow-100 hover:shadow-xl transition-all duration-300">
-                        <button className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold border-none rounded-lg cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95" onClick={() => {
-                            const filteredList = filteredRestaurants.filter((res) => res.info.avgRating > 4.5)
-                            setFilteredRestaurants(filteredList);
-                        }}>⭐ Top Rated Restaurants</button>
-                    </div>
+                    {/* Filter Buttons - Stack on mobile */}
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full lg:w-auto">
+                        <div className="bg-white p-2 rounded-2xl shadow-lg border border-yellow-100 hover:shadow-xl transition-all duration-300">
+                            <button className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold border-none rounded-lg cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 text-sm sm:text-base" onClick={() => {
+                                const filteredList = filteredRestaurants.filter((res) => res.info.avgRating > 4.5)
+                                setFilteredRestaurants(filteredList);
+                            }}>⭐ Top Rated</button>
+                        </div>
 
-                    <div className="username-section flex items-center gap-3 bg-white p-2 rounded-2xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300">
-                        <div className="text-2xl">👤</div>
-                        <label className="font-bold text-gray-700 whitespace-nowrap">UserName :</label>
-                        <input className="username-input px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm min-w-[150px] bg-gray-50 focus:bg-white transition-all duration-300" type="text" value={loggedInUSer} onChange={(e) => {
-                            setUserName(e.target.value);
-                        }}></input>
+                        {/* Username section - Hidden on small mobile, visible on sm+ */}
+                        <div className="username-section hidden sm:flex items-center gap-2 lg:gap-3 bg-white p-2 rounded-2xl shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300">
+                            <div className="text-lg sm:text-2xl">👤</div>
+                            <label className="font-bold text-gray-700 text-sm lg:text-base whitespace-nowrap">User:</label>
+                            <input 
+                                className="username-input px-2 py-2 lg:px-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm w-24 lg:w-32 bg-gray-50 focus:bg-white transition-all duration-300 text-sm lg:text-base" 
+                                type="text" 
+                                value={loggedInUSer} 
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                        </div>
                     </div>
                 </div>
 
                 {/* Quick Stats Banner */}
-                <div className="stats-banner bg-gradient-to-r from-emerald-100 to-green-100 py-4 px-6">
-                    <div className="flex justify-center items-center gap-8 text-sm font-bold text-emerald-800">
+                <div className="stats-banner bg-gradient-to-r from-emerald-100 to-green-100 py-3 sm:py-4 px-3 sm:px-6">
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 lg:gap-8 text-xs sm:text-sm font-bold text-emerald-800">
                         <div className="flex items-center gap-2">
-                            <span className="text-lg">🏪</span>
-                            <span>{filteredRestaurants.length} Restaurants Available</span>
+                            <span className="text-base sm:text-lg">🏦</span>
+                            <span className="text-center sm:text-left">{filteredRestaurants.length} Restaurants</span>
+                        </div>
+                        <div className="hidden sm:flex items-center gap-2">
+                            <span className="text-base sm:text-lg">🚚</span>
+                            <span>Free Delivery Above ₹299</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="text-lg">🚚</span>
-                            <span>Free Delivery on Orders Above ₹299</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <span className="text-lg">⏱️</span>
-                            <span>Average Delivery: 25-35 mins</span>
+                            <span className="text-base sm:text-lg">⏱️</span>
+                            <span className="text-center sm:text-left">Avg: 25-35 mins</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Restaurant Cards Section with Enhanced Container */}
-            <div className="restaurants-section py-8">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="text-center mb-8">
-                        <h2 className="text-3xl font-black text-gray-800 mb-2">🍽️ Available Restaurants</h2>
-                        <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-green-600 mx-auto rounded-full"></div>
+            <div className="restaurants-section py-6 sm:py-8">
+                <div className="max-w-7xl mx-auto px-3 sm:px-4">
+                    <div className="text-center mb-6 sm:mb-8">
+                        <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">🍽️ Available Restaurants</h2>
+                        <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-emerald-500 to-green-600 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-5 p-5">
+                    {/* Responsive grid for cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 p-3 sm:p-5">
                         {/* {console.log(filteredRestaurants)} */}
                         {filteredRestaurants.map((restaurant, index) => (
-                            <div key={restaurant.info.id} className="restaurant-card-wrapper animate-fadeInUp" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <div key={restaurant.info.id} className="restaurant-card-wrapper animate-fadeInUp" style={{ animationDelay: `${index * 0.05}s` }}>
                                 <Link to={"/restaurant/" + restaurant.info.id}>
                                     {/* Optional Chaining */}
                                     {"promoted" in restaurant.info ?
